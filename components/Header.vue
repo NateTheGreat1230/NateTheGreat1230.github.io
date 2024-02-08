@@ -27,7 +27,7 @@
                 <font-awesome-icon :icon="['fas', 'bars']" />
             </button>
         </div>
-        <div v-if="isMenuOpen" class="absolute top-16 right-0 p-4 bg-slate-900 text-white border rounded-lg border-gray-200 space-y-2 md:hidden">
+        <div v-if="isMenuOpen" class="absolute top-20 right-4 p-4 bg-slate-900 text-white border rounded-lg border-gray-200 space-y-2 md:hidden">
             <NuxtLink href="/">
                 <button @click="closeMenu" class="block w-24 h-7 mb-2 border border-white text-center rounded-full hover:bg-violet-900">Home</button>
             </NuxtLink>

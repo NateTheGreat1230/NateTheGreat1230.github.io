@@ -11,7 +11,7 @@
                     </NuxtLink>
                 </div>
                 <div class="flex flex-col justify-right items-left gap-4">
-                    <p class="font-bold text-lg">Usefull links</p>
+                    <p class="font-bold text-lg">Useful links</p>
                     <NuxtLink to="/" class="duration-100 hover:text-violet-500">Home</NuxtLink>
                     <NuxtLink to="/portfolio" class="duration-100 hover:text-violet-500">Portfolio</NuxtLink>
                     <NuxtLink to="/contact" class="duration-100 hover:text-violet-500">Contact</NuxtLink>
