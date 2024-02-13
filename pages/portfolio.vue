@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class=" bg-black bg-opacity-50 rounded-2xl mt-10 pb-10 px-4">
-                <h1 class="text-4xl font-bold mb-8 w-full flex justify-center">Web Projects</h1>
+                <h1 class="text-4xl font-bold my-8 w-full flex justify-center">Web Projects</h1>
                 <div class="flex flex-row flex-shrink justify-center items-center gap-4 flex-wrap w-full">
                     <ProjectCard
                         title="Portfolio Website"
