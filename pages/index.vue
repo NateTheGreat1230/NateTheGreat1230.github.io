@@ -14,7 +14,7 @@
                     <p class="text-violet-500 font-semibold">Nate</p>
                 </div>
                 <p class="text-2xl">I am a software developer.</p>
-                <p class="flex flex-row gap-1">I have experience in: <VueWriter :array="['Java', 'JavaScript', 'Python', 'HTML', 'CSS', 'TypeScript', 'NuxtJS']" class="text-violet-500 font-semibold caret-white"/></p>
+                <p class="flex flex-col sm:flex-row gap-1">I have experience in: <VueWriter :array="['Java', 'JavaScript', 'Python', 'HTML', 'CSS', 'TypeScript', 'NuxtJS']" class="text-violet-500 font-semibold caret-white"/></p>
                 <p>I am committed to continuous learning and professional development, actively seeking opportunities to enhance my skills and expertise. If you have any freelance projects, please feel free to reach out to me.</p>
                 <NuxtLink href="/contact">
                     <button class="text-lg p-2 w-36 border-2 border-white hover:border-violet-500 hover:text-violet-500 rounded-full font-semibold">Contact Me</button>

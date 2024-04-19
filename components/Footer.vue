@@ -11,7 +11,7 @@
                     </NuxtLink>
                 </div>
                 <div class="flex flex-col justify-right items-left gap-4">
-                    <p class="font-bold text-lg">Useful links</p>
+                    <p class="font-bold text-lg">Useful Links</p>
                     <NuxtLink to="/" class="duration-100 hover:text-violet-500">Home</NuxtLink>
                     <NuxtLink to="/portfolio" class="duration-100 hover:text-violet-500">Portfolio</NuxtLink>
                     <NuxtLink to="/contact" class="duration-100 hover:text-violet-500">Contact</NuxtLink>
@@ -20,7 +20,7 @@
                     <p class="font-bold text-lg">Other Info</p>
                     <NuxtLink to="/resume.pdf" target="_blank" class="duration-100 hover:text-violet-500">Resume</NuxtLink>
                     <NuxtLink to="https://github.com/NateTheGreat1230?tab=overview&from=2023-12-01&to=2023-12-31" target="_blank" class="duration-100 hover:text-violet-500">Commit History</NuxtLink>
-                    <NuxtLink to="https://github.com/PrismNet" target="_blank" class="duration-100 hover:text-violet-500">Organisation</NuxtLink>
+                    <NuxtLink to="https://github.com/PrismNet" target="_blank" class="duration-100 hover:text-violet-500">Organization</NuxtLink>
                 </div>
                 <div class="hidden sm:flex flex-col justify-right items-left gap-4">
                     <p class="font-bold text-lg">External Links</p>
@@ -49,8 +49,8 @@
                         <NuxtLink to="https://discord.com/users/968603251664625764" target="_blank" class="w-10 h-10 flex justify-center items-center text-2xl transition-all ease-in-out duration-100 hover:text-violet-500">
                             <font-awesome-icon :icon="['fab', 'discord']" />
                         </NuxtLink>
-                        <NuxtLink to="https://codepen.io/NateTheGreat1230" target="_blank" class="w-10 h-10 flex justify-center items-center text-2xl transition-all ease-in-out duration-100 hover:text-violet-500">
-                            <font-awesome-icon :icon="['fab', 'codepen']" />
+                        <NuxtLink to="https://www.instagram.com/natethegreat1230/" target="_blank" class="w-10 h-10 flex justify-center items-center text-2xl transition-all ease-in-out duration-100 hover:text-violet-500">
+                            <font-awesome-icon :icon="['fab', 'square-instagram']" />
                         </NuxtLink>
                     </div>
                 </div>

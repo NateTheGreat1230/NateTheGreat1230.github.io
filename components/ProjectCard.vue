@@ -7,7 +7,7 @@
     });
 </script>
 <template>
-        <div class="flex flex-col justify-center items-center gap-4 w-80  p-4 bg-black bg-opacity-70 border-2 border-white hover:border-violet-500 text-white rounded-xl flex-wrap text-center transition-all ease-in-out duration-300">
+        <div class="flex flex-col justify-center items-center gap-4 w-80 min-h-96 p-4 bg-black bg-opacity-70 border-2 border-white hover:border-violet-500 text-white rounded-xl flex-wrap text-center transition-all ease-in-out duration-300">
             <img :src="image" class="w-full h-32 object-cover rounded-lg" /> 
             <h1 class="text-2xl font-bold">{{ title }}</h1>
             <p class="text-xl">{{ description }}</p>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     useHead({
-        title: 'Projects',
+        title: 'Portfolio',
     })
 </script>
 <template>
@@ -35,7 +35,7 @@
                     <ProjectCard
                         title="Portfolio Website"
                         description="A fully responsive portfolio website to showcase my web development skills."
-                        image="/projectImages/portfoliocurrent.png"
+                        image="/projectImages/website pic.png"
                         link="https://github.com/NateTheGreat1230"
                     />
                     <ProjectCard

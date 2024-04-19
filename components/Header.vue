@@ -10,7 +10,7 @@
 </script>
 <template>
     <div class="bg-slate-900 p-4 h-16 text-white flex flex-row justify-between items-center">
-        <NuxtLink to="/" class="text-4xl font-bold hover:text-violet-500 transition-all ease-in-out duration-300">Nate Washburn</NuxtLink>
+        <NuxtLink to="/" class="text-2xl sm:text-4xl font-bold hover:text-violet-500 transition-all ease-in-out duration-300">Nate Washburn</NuxtLink>
         <div class="hidden md:flex flex-row justify-right items-center gap-4">
             <NuxtLink href="/">
                 <button class="text-lg p-2 w-24 border-2 border-white hover:border-violet-500 hover:text-violet-500 rounded-full font-semibold">Home</button>
