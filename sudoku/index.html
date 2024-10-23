@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku App</title>
+    <script src="game.js" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="content">
+    <h1>Sudoku App</h1>
+    <h3 class="infospot" id="info"><br></h3>
+    <div class="btns" id="btns">
+        <button id="play-game" class="btn">Play Game!</button>
+    </div>
+    <div id="game-board" class="game-board start"></div>
+    <div class="diff-select">
+        <p>Change difficulty: easy is default</p>
+        <div class="radios">
+            <div>
+                <input type="radio" name="skill" id="easy" value="easy">
+                <label for="easy">Easy</label>
+            </div>
+            <div>
+                <input type="radio" name="skill" id="medium" value="medium">
+                <label for="medium">Medium</label>
+            </div>
+            <div>
+                <input type="radio" name="skill" id="hard" value="hard">
+                <label for="hard">Hard</label>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

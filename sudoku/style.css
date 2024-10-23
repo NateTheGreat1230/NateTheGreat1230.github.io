@@ -1,0 +1,139 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+}
+
+.content {
+    background-color: blueviolet;
+    padding: 20px;
+    border: 2px solid white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    padding: 10px;
+    font-size: large;
+    background-color: #69f593;
+    border-radius: 10px;
+    width: 145px;
+    border: 2px solid black;
+}
+
+.diff-select {
+    display: flex;
+    flex-direction: column;
+}
+
+.radios {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.radios label {
+    background-color: #646865;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: large;
+    width: 150px;
+}
+
+.radios input {
+    display: none;
+}
+
+.radios input:checked + label {
+    border-color: #69f593;
+    background-color: #444645;
+}
+
+.start {
+    margin: 0px;
+    padding: 0px;
+    height: 400px;
+    width: 400px;
+}
+
+.game-board {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+td {
+    margin: 0px;
+    padding: 0px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+tr:nth-child(3n + 1) td {
+    border-bottom: 2px solid black;
+}
+
+td:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+.sudoku-cell {
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: 2px solid black;
+    background-color: white;
+    font-size: 1.5em;
+}
+
+.sudoku-cell:focus {
+    outline: none;
+    background-color: #b3b3b3;
+}
+
+.sudoku-cell:disabled {
+    background-color: #69f593;
+    color: black;
+}
+
+.cell-conflict {
+    color: red;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 0px;
+        margin: 0px;
+        background-color: blueviolet;
+        display: block;
+    }
+    .content {
+        border: none;
+    }
+    .start {
+        height: 350px;
+        width: 300px;
+    }
+    td {
+        height: 30px;
+        width: 30px;
+    }
+}
