@@ -181,8 +181,11 @@ function displayLoose() {
             <h2>You Lose. Your snake was ${snake.length} feet long!</h2>
             <button id='playagain'>Play Again</button>
         </div>`;
-    const btn = document.getElementById('playagain');
     btn.addEventListener('click', readyNext);
+    btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        readyNext();
+    });
 }
 
 function displayWin() {
@@ -217,11 +220,11 @@ function drawGame() {
 function requestFullscreen() {
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+    } else if (document.documentElement.mozRequestFullScreen) {
         document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+    } else if (document.documentElement.webkitRequestFullscreen) {
         document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+    } else if (document.documentElement.msRequestFullscreen) {
         document.documentElement.msRequestFullscreen();
     }
 }
