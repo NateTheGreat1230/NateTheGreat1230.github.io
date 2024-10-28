@@ -179,8 +179,10 @@ function displayLoose() {
     gameboard.innerHTML = `
         <div class="message">
             <h2>You Lose. Your snake was ${snake.length} feet long!</h2>
-            <button onclick="readyNext()">Play Again</button>
+            <button id='playagain'>Play Again</button>
         </div>`;
+    const btn = document.getElementById('playagain');
+    btn.addEventListener('click', readyNext);
 }
 
 function displayWin() {
@@ -225,7 +227,9 @@ function requestFullscreen() {
 }
 
 function handleStart() {
-    requestFullscreen();
+    if (isMobile) {
+        requestFullscreen();
+    }
     resetGame();
     startGame();
 }
