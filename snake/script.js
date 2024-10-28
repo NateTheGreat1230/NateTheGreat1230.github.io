@@ -181,18 +181,13 @@ function displayLoose() {
             <h2>You Lose. Your snake was ${snake.length} feet long!</h2>
             <button id='playagain'>Play Again</button>
         </div>`;
-    btn.addEventListener('click', readyNext);
-    btn.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        readyNext();
-    });
 }
 
 function displayWin() {
     gameboard.innerHTML = `
         <div class="message">
             <h2>You Win!</h2>
-            <button onclick="readyNext()">Play Again</button>
+            <button id='playagain'>Play Again</button>
         </div>`;
 }
 
@@ -307,6 +302,9 @@ function handleTouchStart(event) {
         const firstTouch = event.touches[0];
         startX = firstTouch.clientX;
         startY = firstTouch.clientY;
+    } else {
+        const nextBtn = document.getElementById('playagain');
+        nextBtn.addEventListener('click', readyNext);
     }
 }
 
