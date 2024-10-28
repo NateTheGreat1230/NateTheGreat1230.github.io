@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+        <h1>Snake Game</h1>
+        <div class="scores">
+            <div class="score">
+                <span>Score:</span>
+                <span id="score">0</span>
+            </div>
+            <div class="score">
+                <span id="highScore">High Score:</span>
+            </div>
+        </div>
+        <div class="gameboard" id="gameboard"></div>
+        <div class="difficulty-selector" id="difficulty-selector">
+            <input type="radio" id="easy" name="difficulty" value="easy" checked>
+            <label for="easy">Easy</label>
+        
+            <input type="radio" id="medium" name="difficulty" value="medium">
+            <label for="medium">Medium</label>
+        
+            <input type="radio" id="hard" name="difficulty" value="hard">
+            <label for="hard">Hard</label>
+        
+            <input type="radio" id="expert" name="difficulty" value="expert">
+            <label for="expert">Expert</label>
+        </div>
+</body>
+</html>
