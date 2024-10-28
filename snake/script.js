@@ -283,6 +283,7 @@ gameboard.addEventListener('touchstart', handleTouchStart, false);
 gameboard.addEventListener('touchend', handleTouchEnd, false);
 
 function handleTouchStart(event) {
+    event.preventDefault();
     if (inputPaused) return;
     const firstTouch = event.touches[0];
     startX = firstTouch.clientX;
@@ -290,6 +291,7 @@ function handleTouchStart(event) {
 }
 
 function handleTouchEnd(event) {
+    event.preventDefault();
     if (inputPaused) return;
     const endX = event.changedTouches[0].clientX;
     const endY = event.changedTouches[0].clientY;
