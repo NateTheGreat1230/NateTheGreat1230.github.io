@@ -1,6 +1,6 @@
 body {
-    background-color: #111;
-    color: #eee;
+    background-color: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +18,8 @@ body {
 
 .scores {
     display: flex;
-    gap: 20px;
-}
-
-.score {
+    width: 100%;
+    justify-content: space-between;
     font-size: 20px;
 }
 
@@ -29,10 +27,11 @@ body {
     display: grid;
     gap: 1px;
     background-color: #222;
+    border: 10px solid rgb(31, 197, 31);
 }
 
 .snake {
-    background-color: green;
+    background-color: rgb(31, 197, 31);
 }
 
 .food {
@@ -47,11 +46,11 @@ body {
 }
 
 .difficulty-selector label {
-    background-color: #646865;
+    background-color: #222;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid black;
-    font-size: large;
+    font-size: 15px;
     width: 60px;
 }
 
@@ -60,7 +59,7 @@ body {
 }
 
 .difficulty-selector input:checked + label {
-    border-color: #69f593;
+    border-color: rgb(31, 197, 31);
     background-color: #444645;
 }
 
@@ -85,8 +84,9 @@ body {
 .message button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: rgb(31, 197, 31);
     color: white;
+    font-size: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
