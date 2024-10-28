@@ -303,39 +303,39 @@ gameboard.addEventListener('touchstart', handleTouchStart, false);
 gameboard.addEventListener('touchend', handleTouchEnd, false);
 
 function handleTouchStart(event) {
-    event.preventDefault();
-    if (inputPaused) return;
-    const firstTouch = event.touches[0];
-    startX = firstTouch.clientX;
-    startY = firstTouch.clientY;
+    if (!inputPaused) {
+        const firstTouch = event.touches[0];
+        startX = firstTouch.clientX;
+        startY = firstTouch.clientY;
+    }
 }
 
 function handleTouchEnd(event) {
-    event.preventDefault();
-    if (inputPaused) return;
-    const endX = event.changedTouches[0].clientX;
-    const endY = event.changedTouches[0].clientY;
-    const diffX = endX - startX;
-    const diffY = endY - startY;
-    const distance = Math.sqrt(diffX * diffX + diffY * diffY);
-
-    if (distance < minSwipe) {
-        if (!gamePlaying) {
-            handleStart();
-            return;
+    if (!inputPaused) {
+        const endX = event.changedTouches[0].clientX;
+        const endY = event.changedTouches[0].clientY;
+        const diffX = endX - startX;
+        const diffY = endY - startY;
+        const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+    
+        if (distance < minSwipe) {
+            if (!gamePlaying) {
+                handleStart();
+                return;
+            }
         }
-    }
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX > 0 && direction.x !== -1) {
-            nextDirection = { x: 1, y: 0 };
-        } else if (diffX < 0 && direction.x !== 1) {
-            nextDirection = { x: -1, y: 0 };
-        }
-    } else {
-        if (diffY > 0 && direction.y !== -1) {
-            nextDirection = { x: 0, y: 1 };
-        } else if (diffY < 0 && direction.y !== 1) {
-            nextDirection = { x: 0, y: -1 };
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0 && direction.x !== -1) {
+                nextDirection = { x: 1, y: 0 };
+            } else if (diffX < 0 && direction.x !== 1) {
+                nextDirection = { x: -1, y: 0 };
+            }
+        } else {
+            if (diffY > 0 && direction.y !== -1) {
+                nextDirection = { x: 0, y: 1 };
+            } else if (diffY < 0 && direction.y !== 1) {
+                nextDirection = { x: 0, y: -1 };
+            }
         }
     }
 }
