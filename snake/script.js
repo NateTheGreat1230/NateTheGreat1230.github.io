@@ -181,6 +181,10 @@ function displayLoose() {
             <h2>You Lose. Your snake was ${snake.length} feet long!</h2>
             <button id='playagain'>Play Again</button>
         </div>`;
+    if (!isMobile) {
+        const nextBtn = document.getElementById('playagain');
+        nextBtn.addEventListener('click', readyNext);
+    }
 }
 
 function displayWin() {
@@ -189,6 +193,10 @@ function displayWin() {
             <h2>You Win!</h2>
             <button id='playagain'>Play Again</button>
         </div>`;
+    if (!isMobile) {
+        const nextBtn = document.getElementById('playagain');
+        nextBtn.addEventListener('click', readyNext);
+    }
 }
 
 function readyNext() {
