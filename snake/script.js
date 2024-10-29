@@ -6,37 +6,37 @@ const diffSelect = document.getElementById('difficulty-selector');
 const difficulties = {
     easy: {
         boardSize: 10, 
-        speed: 250,
+        speed: 200,
         highscore: localStorage.getItem("high-score-easy") || 0,
         size: 38
     },
     medium: {
         boardSize: 15,
-        speed: 200,
+        speed: 150,
         highscore: localStorage.getItem("high-score-medium") || 0,
         size: 25
     },
     hard: {
         boardSize: 20,
-        speed: 200,
+        speed: 125,
         highscore: localStorage.getItem("high-score-hard") || 0,
         size: 19
     },
     expert: {
         boardSize: 25,
-        speed: 150,
+        speed: 100,
         highscore: localStorage.getItem("high-score-expert") || 0,
         size: 15
     }
 };
-let snake = [{ x: 10, y: 10 }];
+let snake = [];
 let direction = { x: 0, y: 0 };
-let directionQueue = [{ x: 0, y: -1 }];
+let directionQueue = [];
 let food = {};
 let score = 0;
 let currentDifficulty = 'easy';
-let interval;
 let speed = 0;
+let lastUpdate = 0;
 let gamePlaying = false;
 let inputPaused = false;
 let isMobile = window.innerWidth <= 500;
@@ -44,12 +44,9 @@ highScoreDisplay.textContent = displayHighScore();
 
 function resetGame() {
     updateGameboardSize();
-    direction = { x: 0, y: 0 };
-    directionQueue = [{ x: 0, y: -1 }];
     score = 0;
-    snake = [{ x: Math.floor(boardSize / 2), y: Math.floor(boardSize / 2) }];
+    snake = [{ x: Math.floor(boardSize / 2), y: Math.floor(boardSize / 2), prevX: Math.floor(boardSize / 2), prevY: Math.floor(boardSize / 2) }];
     generateFood();
-    drawGame();
 }
 
 function startGame() {
@@ -57,7 +54,7 @@ function startGame() {
     direction = { x: 0, y: -1 };
     directionQueue = [{ x: 0, y: -1 }];
     speed = difficulties[currentDifficulty].speed;
-    interval = setInterval(gameLoop, speed);
+    requestAnimationFrame(renderLoop);
     disableDiffSelect();
 }
 
@@ -74,21 +71,21 @@ function gameLoop() {
             growSnake();
             generateFood();
             updateScore();
-            if (score % 10 === 0 && currentDifficulty !== 'expert') {
-                increaseSpeed();
-            }
         }
-        drawGame();
     }
 }
 
 function updateSnakePosition() {
-    const head = { 
-        x: snake[0].x + direction.x, 
-        y: snake[0].y + direction.y 
-    };
-    snake.unshift(head);
-    snake.pop();
+    for (let i = snake.length - 1; i > 0; i--) {
+        snake[i].prevX = snake[i].x;
+        snake[i].prevY = snake[i].y;
+        snake[i].x = snake[i - 1].x;
+        snake[i].y = snake[i - 1].y;
+    }
+    snake[0].prevX = snake[0].x;
+    snake[0].prevY = snake[0].y;
+    snake[0].x += direction.x;
+    snake[0].y += direction.y;
 }
 
 function updateGameboardSize() {
@@ -102,6 +99,7 @@ function updateGameboardSize() {
     gameboard.style.height = `${size}px`;
     gameboard.style.gridTemplateRows = `repeat(${boardSize}, ${cellSize}px)`;
     gameboard.style.gridTemplateColumns = `repeat(${boardSize}, ${cellSize}px)`;
+    document.documentElement.style.setProperty('--board-size', boardSize);
 }
 
 function checkCollision() {
@@ -150,17 +148,8 @@ function displayHighScore() {
     return `High Score (${currentDifficulty}): ${difficulties[currentDifficulty].highscore}`;
 }
 
-function increaseSpeed() {
-    if (speed > 50) {
-        clearInterval(interval);
-        speed -= 10;
-        interval = setInterval(gameLoop, speed);
-    }
-}
-
 function gameOver() {
     gamePlaying = false;
-    clearInterval(interval);
     enableDiffSelect();
     inputPaused = true;
     displayLoose();
@@ -170,7 +159,6 @@ function gameOver() {
 function gameWon() {
     if (snake.length === (boardSize * boardSize)) {
         gamePlaying = false;
-        clearInterval(interval);
         enableDiffSelect();
         inputPaused = true;
         displayWin();
@@ -180,7 +168,7 @@ function gameWon() {
 function displayLoose() {
     gameboard.innerHTML = `
         <div class="message">
-            <h2>You Lose. Your snake was ${snake.length} feet long!</h2>
+            <h2>You Lose. Your snake was ${score} feet long!</h2>
             <button id='playagain'>Play Again</button>
         </div>`;
     if (!isMobile) {
@@ -206,12 +194,27 @@ function readyNext() {
     gameboard.innerHTML = '';
 }
 
-function drawGame() {
+function renderLoop(timestamp) {
+    if (gamePlaying) {
+        const fraction = (timestamp - lastUpdate) / speed;
+        requestAnimationFrame(renderLoop);
+        drawGame(fraction);
+        if (fraction >= 1) {
+            gameLoop();
+            lastUpdate = timestamp;
+        }
+    }
+}
+
+function drawGame(fraction) {
     gameboard.innerHTML = '';
     snake.forEach(segment => {
         const snakeElement = document.createElement('div');
-        snakeElement.style.gridRowStart = segment.y + 1;
-        snakeElement.style.gridColumnStart = segment.x + 1;
+        const interpX = segment.prevX + fraction * (segment.x - segment.prevX);
+        const interpY = segment.prevY + fraction * (segment.y - segment.prevY);
+        snakeElement.style.gridRowStart = Math.floor(interpY) + 1;
+        snakeElement.style.gridColumnStart = Math.floor(interpX) + 1;
+        snakeElement.style.transform = `translate(${(interpX % 1) * 100}%, ${(interpY % 1) * 100}%)`;
         snakeElement.classList.add('snake');
         gameboard.appendChild(snakeElement);
     });
@@ -258,6 +261,7 @@ function enableDiffSelect() {
     diffSelect.classList.remove('hideBtns');
 }
 
+// Keyboard controls including arrows and wasd.
 function changeDirection(event) {
     let newDirection = null;
     switch (event.key) {
