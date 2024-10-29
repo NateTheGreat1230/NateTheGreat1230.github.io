@@ -31,7 +31,7 @@ const difficulties = {
 };
 let snake = [{ x: 10, y: 10 }];
 let direction = { x: 0, y: 0 };
-let nextDirection = { x: 0, y: -1 };
+let directionQueue = [{ x: 0, y: -1 }];
 let food = {};
 let score = 0;
 let currentDifficulty = 'easy';
@@ -39,13 +39,13 @@ let interval;
 let speed = 0;
 let gamePlaying = false;
 let inputPaused = false;
-let isMobile = window.innerWidth <= 768;
+let isMobile = window.innerWidth <= 500;
 highScoreDisplay.textContent = displayHighScore();
 
 function resetGame() {
     updateGameboardSize();
     direction = { x: 0, y: 0 };
-    nextDirection = { x: 0, y: -1 };
+    directionQueue = [{ x: 0, y: -1 }];
     score = 0;
     snake = [{ x: Math.floor(boardSize / 2), y: Math.floor(boardSize / 2) }];
     generateFood();
@@ -55,14 +55,16 @@ function resetGame() {
 function startGame() {
     gamePlaying = true;
     direction = { x: 0, y: -1 };
-    nextDirection = { x: 0, y: -1 };
+    directionQueue = [{ x: 0, y: -1 }];
     speed = difficulties[currentDifficulty].speed;
     interval = setInterval(gameLoop, speed);
     disableDiffSelect();
 }
 
 function gameLoop() {
-    direction = nextDirection;
+    if (directionQueue.length > 0) {
+        direction = directionQueue.shift();
+    }
     updateSnakePosition();
     gameWon();
     if (checkCollision()) {
@@ -256,42 +258,51 @@ function enableDiffSelect() {
     diffSelect.classList.remove('hideBtns');
 }
 
-// Keyboard controls. Arrows and wasd work.
 function changeDirection(event) {
+    let newDirection = null;
     switch (event.key) {
         case 'ArrowUp':
         case 'w':
-            if (direction.y !== 1) {
-                nextDirection = { x: 0, y: -1 };
-            }
+            newDirection = { x: 0, y: -1 };
             break;
         case 'ArrowDown':
         case 's':
-            if (direction.y !== -1) {
-                nextDirection = { x: 0, y: 1 };
-            }
+            newDirection = { x: 0, y: 1 };
             break;
         case 'ArrowLeft':
         case 'a':
-            if (direction.x !== 1) {
-                nextDirection = { x: -1, y: 0 };
-            }
+            newDirection = { x: -1, y: 0 };
             break;
         case 'ArrowRight':
         case 'd':
-            if (direction.x !== -1) {
-                nextDirection = { x: 1, y: 0 };
-            }
+            newDirection = { x: 1, y: 0 };
             break;
+    }
+    if (newDirection) {
+        const lastDirection = directionQueue[directionQueue.length - 1] || direction;
+        if (
+            newDirection.x !== -lastDirection.x ||
+            newDirection.y !== -lastDirection.y
+        ) {
+            directionQueue.push(newDirection);
+        }
     }
 }
 
 window.addEventListener('keydown', e => {
     if (inputPaused) return;
+    const allowedKeys = [
+        'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+        'w', 'a', 's', 'd',
+        'Enter', ' '
+    ];
+    if (!allowedKeys.includes(e.key)) return;
     if (gamePlaying) {
         changeDirection(e);
     } else {
-        handleStart();
+        if (allowedKeys.includes(e.key)) {
+            handleStart();
+        }
     }
 });
 
@@ -323,25 +334,28 @@ function handleTouchEnd(event) {
         const diffX = endX - startX;
         const diffY = endY - startY;
         const distance = Math.sqrt(diffX * diffX + diffY * diffY);
-    
         if (distance < minSwipe) {
             if (!gamePlaying) {
                 handleStart();
                 return;
             }
         }
+        let newDirection = null;
         if (Math.abs(diffX) > Math.abs(diffY)) {
             if (diffX > 0 && direction.x !== -1) {
-                nextDirection = { x: 1, y: 0 };
+                newDirection = { x: 1, y: 0 };
             } else if (diffX < 0 && direction.x !== 1) {
-                nextDirection = { x: -1, y: 0 };
+                newDirection = { x: -1, y: 0 };
             }
         } else {
             if (diffY > 0 && direction.y !== -1) {
-                nextDirection = { x: 0, y: 1 };
+                newDirection = { x: 0, y: 1 };
             } else if (diffY < 0 && direction.y !== 1) {
-                nextDirection = { x: 0, y: -1 };
+                newDirection = { x: 0, y: -1 };
             }
+        }
+        if (newDirection) {
+            directionQueue.push(newDirection);
         }
     }
 }
