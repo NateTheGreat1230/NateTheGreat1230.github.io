@@ -28,7 +28,12 @@ body {
     gap: 1px;
     background-color: #222;
     border: 10px solid rgb(31, 197, 31);
+    background-image: 
+        linear-gradient(#333 1px, transparent 1px), 
+        linear-gradient(90deg, #333 1px, transparent 1px);
+    background-size: calc(100% / var(--board-size)) calc(100% / var(--board-size));
 }
+
 
 .snake {
     background-color: rgb(31, 197, 31);
