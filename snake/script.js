@@ -59,18 +59,21 @@ function startGame() {
 }
 
 function gameLoop() {
-    if (directionQueue.length > 0) {
-        direction = directionQueue.shift();
-    }
-    updateSnakePosition();
-    gameWon();
-    if (checkCollision()) {
-        gameOver();
+    if (checkGameWon()) {
+        gameWon();
     } else {
-        if (ateFood()) {
-            growSnake();
-            generateFood();
-            updateScore();
+        if (directionQueue.length > 0) {
+            direction = directionQueue.shift();
+        }
+        updateSnakePosition();
+        if (checkCollision()) {
+            gameOver();
+        } else {
+            if (ateFood()) {
+                growSnake();
+                generateFood();
+                updateScore();
+            }
         }
     }
 }
@@ -117,13 +120,15 @@ function growSnake() {
 }
 
 function generateFood() {
-    while(true) {
-        food = {
-            x: Math.floor(Math.random() * boardSize),
-            y: Math.floor(Math.random() * boardSize)
-        };
-        if (!snake.some(segment => segment.x === food.x && segment.y === food.y)) {
-            break;
+    if (snake.length < (boardSize * boardSize) - 1) {
+        while(true) {
+            food = {
+                x: Math.floor(Math.random() * boardSize),
+                y: Math.floor(Math.random() * boardSize)
+            };
+            if (!snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+                break;
+            }
         }
     }
 }
@@ -148,6 +153,10 @@ function displayHighScore() {
     return `High Score (${currentDifficulty}): ${difficulties[currentDifficulty].highscore}`;
 }
 
+function checkGameWon() {
+    return (snake.length >= (boardSize * boardSize) - 1);
+}
+
 function gameOver() {
     gamePlaying = false;
     enableDiffSelect();
@@ -157,12 +166,10 @@ function gameOver() {
 }
 
 function gameWon() {
-    if (snake.length === (boardSize * boardSize)) {
-        gamePlaying = false;
-        enableDiffSelect();
-        inputPaused = true;
-        displayWin();
-    }
+    gamePlaying = false;
+    enableDiffSelect();
+    inputPaused = true;
+    displayWin();
 }
 
 function displayLoose() {
